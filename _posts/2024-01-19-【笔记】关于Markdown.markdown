@@ -1,0 +1,96 @@
+---
+layout: post
+title:  "【笔记】关于Markdown"
+date:   2024-01-19 17:25:16 +0800
+categories: 笔记 Markdown
+---
+
+<div style="color: purple;text-align:center;font-size: 30px">学习使用Markdown</div>
+<hr>
+# 感觉Markdown可以直接支持html的语法
+
+- Markdown的设计目标之一是与HTML无缝结合，因此可以在Markdown文档中嵌入HTML标签，以实现更复杂的样式和排版。
+
+# 我不想让Markdown解释器翻译我的文字
+- 例如我想展示Markdown中显示图片的语法。可以在Markdown语法的特殊字符前加上反斜杠。例如：
+
+```
+!\[图片说明](图片地址)
+```
+这里的!和[都是特殊符号，所以可以转义。但是我把[转义后，整个MD的语法结构被破坏了，所以这里就可以显示基本的字符串了。
+
+
+# 如何在Markdown文件中插入图片[1]
+
+- 第一种形式："!\[图片说明](图片地址)"
+```
+![新能源发电机示意图](/assets/img/新能源.jpg)
+```
+![新能源发电机示意图](/assets/img/新能源.jpg)
+
+Ps.这张图是从google上搜索到的，应该是AI生成的一张图，因为风机通常应该是3个扇叶，不会有4个扇叶。
+
+- 第二种形式：html语法
+
+```
+<div style="display: flex; justify-content: center;">
+	<img src="url_to_your_image" alt="Your Image" width="300" height="200">
+</div>
+```
+<div style="display: flex; justify-content: center;">
+<img src="/assets/img/新能源.jpg" alt="新能源发电机示意图" width="300" height="200">
+</div>
+
+这样可以设置图片大小和位置。
+
+# 使用公式
+- 必须借助MathJax，因此先要把_layout文件夹搞出来。
+$$\alpha$$
+
+在Markdown语法中，数学公式通常通过 LaTeX 语法包裹在美元符号 `$` 内来表示行内公式，或者使用两个美元符号 `$$` 包裹来创建多行公式块。以下是三个著名的数学公式示例：
+
+- **欧拉恒等式**（Euler's Identity）：   
+   欧拉恒等式：
+
+$$e^{i\pi} + 1 = 0$$
+   
+-  **费马大定理**（Fermat's Last Theorem）：
+   虽然我们不能直接写出证明，但可以表述该定理：
+   
+   费马大定理声明：对于任何大于2的整数 $$ n $$，方程 $$ a^n + b^n = c^n $$ 
+
+$$ a^n + b^n = c^n $$ 
+
+在正整数 $$ a, b,c $$ 中没有解。 
+行内公式：
+```
+紧跟着前面，$$ a^n + b^n = c^n $$，紧跟着后面 
+```  
+行间居中公式：
+```
+前面空一行
+
+$$ a^n + b^n = c^n $$ 
+
+后面空一行
+```
+
+- **质能守恒定律**（Mass-energy equivalence from Einstein's Theory of Relativity）：
+   表达式形式为：
+
+$$ E = mc^2 $$
+
+其中 $$ E $$ 是能量，$$ m $$ 是静止质量，而 $$ c $$ 是光速。
+
+不光要把js拿下来，还要把font字体拿下来
+```
+<script src="{{ '/assets/js/tex-mml-chtml.js' | relative_url }}"></script>
+```
+对应的从gitee上下载了编译后的版本，把output放到js目录下，避免下面的报错
+```
+ERROR `/assets/js/output/chtml/fonts/woff-v2/MathJax_Zero.woff' not found.
+```
+
+
+
+[1]: https://zhuanlan.zhihu.com/p/666644838#:~:text=MarkDown%E6%96%87%E4%BB%B6%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%EF%BC%88%E7%BB%9D%E5%AF%B9%5C%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%5C%E8%B0%83%E6%95%B4%E5%9B%BE%E5%83%8F%E5%A4%A7%E5%B0%8F%E4%BD%8D%E7%BD%AE%EF%BC%89%201%201%E3%80%81%20%E6%8F%92%E5%85%A5%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87%EF%BC%88%E6%9C%89%E6%95%88%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%EF%BC%89%20Markdown%E4%B8%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E7%9A%84%E8%AF%AD%E6%B3%95%E4%B8%BA%EF%BC%8C%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E5%86%99%E5%85%A5%E5%9B%BE%E7%89%87%E6%9C%89%E6%95%88%E9%93%BE%E6%8E%A5%E7%BD%91%E5%9D%80%E5%8D%B3%E5%8F%AF%EF%BC%9A%20%E6%96%B9%E6%B3%951%EF%BC%9A%21%20...%202,center%2C%20right%20%E7%AD%89%20...%205%205%E3%80%81%E5%9B%BE%E5%83%8F%E5%B1%85%E4%B8%AD%E5%B1%95%E7%A4%BA%20%E6%B3%A8%EF%BC%9A%E4%B8%8D%E5%90%8C%E7%BD%91%E7%AB%99%E6%94%AF%E6%8C%81%E7%9A%84markdown%E8%AF%AD%E6%B3%95%E4%B8%8D%E5%90%8C%EF%BC%8C%E6%94%AF%E4%B8%8D%E6%94%AF%E6%8C%81HTML%E8%AF%AD%E6%B3%95%E4%B9%9F%E4%B8%8D%E5%90%8C%EF%BC%8C%E4%BE%8B%E5%A6%82%E4%BD%A0%E7%9A%84%E6%96%87%E7%AB%A0%E6%83%B3%E6%B3%95%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E7%BD%91%E7%AB%99%EF%BC%8C%E5%8F%AF%E8%83%BD%E4%BC%9A%E5%87%BA%E7%8E%B0%E4%B8%8D%E5%85%BC%E5%AE%B9%20  
