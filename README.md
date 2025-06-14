@@ -86,7 +86,7 @@ npm run docs:build
 ```
 生成的文件会在 `docs/.vitepress/dist` 目录
 
-## 部署到 Github
+### 手动部署到 Github
 - 克隆 io 项目到本地
 	```
 	git clone xxxx
@@ -96,5 +96,16 @@ npm run docs:build
 	git checkout --orphan gh-pages
 	```
 - 将 dist 中的所有文件复制到仓库目录中
+	```
+	xcopy dist\*  . /E /H /C /I
+	```
+- 推送到 gh-pages 的分支上
+	```
+	git push origin gh-pages
+	```
 - 在 Github 仓库页面中，进入 setting 找到 pages，设置 gh-pages 为网页的分支。
+
+
+
+
 
