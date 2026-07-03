@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的知识库 — 大学生自用</title>
-  <meta name="description" content="一台 Mac，一颗好奇的心。从搞定新电脑到探索 AI 和物理世界，这里是我自用的学习笔记。">
+  <title>知识探索站</title>
+  <meta name="description" content="AI 人工智能 · 趣味物理学 · Mac 新手入门。一个普通人和 AI 一起搭建的学习站点。">
   <meta name="keywords" content="Mac, AI, 人工智能, 物理学, 学习笔记, 教程">
-  <meta property="og:title" content="我的知识库 — 大学生自用">
-  <meta property="og:description" content="一台 Mac，一颗好奇的心。从搞定新电脑到探索 AI 和物理世界，这里是我自用的学习笔记。">
+  <meta property="og:title" content="知识探索站">
+  <meta property="og:description" content="AI 人工智能 · 趣味物理学 · Mac 新手入门。一个普通人和 AI 一起搭建的学习站点。">
   <meta property="og:type" content="website">
   <meta name="author" content="Trae Work">
   <style>
     :root {
-      --bg: #0a0a0f;
-      --bg-elevated: rgba(255,255,255,0.03);
-      --bg-glass: rgba(255,255,255,0.06);
-      --ink: #f5f5f7;
+      --bg: #f5f5f7;
+      --bg-elevated: rgba(0,0,0,0.02);
+      --bg-glass: rgba(255,255,255,0.8);
+      --ink: #1d1d1f;
       --muted: #86868b;
-      --border: rgba(255,255,255,0.08);
-      --accent: #00d4ff;
+      --border: rgba(0,0,0,0.08);
+      --accent: #0071e3;
       --accent-secondary: #7c3aed;
-      --accent-glow: rgba(0,212,255,0.15);
+      --accent-glow: rgba(0,113,227,0.12);
       --font: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
       --max: 1100px;
     }
@@ -45,8 +45,8 @@
       width: 200%;
       height: 200%;
       background:
-        radial-gradient(ellipse at 20% 30%, rgba(0,212,255,0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(124,58,237,0.06) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 30%, rgba(0,113,227,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(124,58,237,0.04) 0%, transparent 50%);
       pointer-events: none;
       z-index: 0;
     }
@@ -59,7 +59,7 @@
       gap: 2.5rem;
       padding: 0 2rem;
       height: 64px;
-      background: rgba(10,10,15,0.7);
+      background: rgba(255,255,255,0.85);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid var(--border);
@@ -118,7 +118,7 @@
       letter-spacing: -0.04em;
       line-height: 1.05;
       margin-bottom: 20px;
-      background: linear-gradient(135deg, #fff 0%, #a0a0b0 100%);
+      background: linear-gradient(135deg, #1d1d1f 0%, #555560 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -137,12 +137,13 @@
       gap: 10px;
       margin-top: 32px;
       padding: 10px 24px;
-      background: var(--bg-glass);
+      background: rgba(255,255,255,0.8);
       border: 1px solid var(--border);
       border-radius: 100px;
       font-size: 14px;
       color: var(--muted);
       backdrop-filter: blur(10px);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
     }
     .hero .tagline::before {
       content: '';
@@ -191,7 +192,7 @@
       margin-top: 60px;
     }
     .site-card {
-      background: var(--bg-glass);
+      background: #ffffff;
       border: 1px solid var(--border);
       border-radius: 24px;
       padding: 48px 32px;
@@ -202,6 +203,7 @@
       display: block;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
     }
     .site-card::before {
       content: '';
@@ -210,12 +212,12 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
     }
     .site-card:hover {
       transform: translateY(-6px);
-      border-color: rgba(255,255,255,0.15);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--accent-glow);
+      border-color: rgba(0,0,0,0.12);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 0 40px var(--accent-glow);
     }
     .site-card .icon {
       width: 60px;
@@ -261,7 +263,7 @@
       margin-top: 48px;
     }
     .tool-card {
-      background: var(--bg-glass);
+      background: #ffffff;
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 32px;
@@ -271,6 +273,7 @@
       color: var(--ink);
       display: block;
       position: relative;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
     }
     .tool-card::before {
       content: '';
@@ -279,12 +282,12 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
     }
     .tool-card:hover {
       transform: translateY(-3px);
-      border-color: rgba(255,255,255,0.12);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      border-color: rgba(0,0,0,0.12);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
     }
     .tool-card .tool-icon {
       width: 44px;
@@ -319,9 +322,10 @@
     .stat-card {
       text-align: center;
       padding: 32px 24px;
-      background: var(--bg-glass);
+      background: #ffffff;
       border: 1px solid var(--border);
       border-radius: 20px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
     }
     .stat-card .number {
       font-size: 44px;
@@ -354,7 +358,7 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: var(--bg-glass);
+      background: rgba(255,255,255,0.9);
       border: 1px solid var(--border);
       color: var(--ink);
       display: flex;
@@ -368,14 +372,15 @@
       backdrop-filter: blur(10px);
       z-index: 99;
       cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
     .back-to-top.visible {
       opacity: 1;
       visibility: visible;
     }
     .back-to-top:hover {
-      border-color: rgba(255,255,255,0.2);
-      box-shadow: 0 4px 20px rgba(0,212,255,0.2);
+      border-color: rgba(0,0,0,0.15);
+      box-shadow: 0 4px 20px rgba(0,113,227,0.15);
     }
 
     footer {
