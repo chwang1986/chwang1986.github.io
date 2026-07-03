@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="精选课程、书籍、社区和数据集，为你的 AI 学习之路导航">
+  <meta name="keywords" content="ChatGPT, Python, 机器学习, 深度学习, 大模型, Mac, AI, 人工智能, 物理学, 学习笔记, 教程">
+  <meta property="og:title" content="学习资源 - AI入门与提高">
+  <meta property="og:description" content="精选课程、书籍、社区和数据集，为你的 AI 学习之路导航">
+  <meta property="og:type" content="website">
+  <meta name="author" content="Trae Work">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学习资源 - AI入门与提高</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f5f5f7;
+      --ink: #1d1d1f;
+      --muted: #86868b;
+      --rule: #d2d2d7;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+      --font: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --font-mono: 'SF Mono', 'JetBrains Mono', monospace;
+      --max: 980px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      padding: 0 2rem;
+      height: 52px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .site-nav a {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+    .site-nav a:hover { color: #ffffff; }
+    .site-nav a.active { color: #ffffff; font-weight: 500; }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      background: var(--bg);
+    }
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .hero .subtitle {
+      font-size: clamp(19px, 2.5vw, 28px);
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.4;
+      font-weight: 400;
+    }
+
+    .section {
+      padding: 100px 20px;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section.bg-alt {
+      background: var(--bg-alt);
+      max-width: 100%;
+      padding: 100px 20px;
+    }
+    .section.bg-alt .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section.bg-dark {
+      background: #000000;
+      max-width: 100%;
+      padding: 100px 20px;
+    }
+    .section.bg-dark .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section.bg-dark h2,
+    .section.bg-dark h3,
+    .section.bg-dark p,
+    .section.bg-dark li { color: #f5f5f7; }
+    .section.bg-dark .subtitle { color: #a1a1a6; }
+
+    .section h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .section .subtitle {
+      font-size: clamp(17px, 2vw, 21px);
+      color: var(--muted);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px;
+      line-height: 1.4;
+    }
+    .section h3 {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin: 48px 0 16px;
+      color: var(--ink);
+    }
+    .section p {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--ink);
+      margin-bottom: 16px;
+      max-width: 680px;
+    }
+    .section ul, .section ol {
+      margin: 0 0 20px 24px;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .section li {
+      margin-bottom: 12px;
+      max-width: 680px;
+    }
+    .section strong { font-weight: 600; color: var(--ink); }
+
+    .resource-card {
+      background: var(--bg);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+    .resource-card h4 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+    .resource-card p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 60px;
+    }
+    .feature-card {
+      background: var(--bg);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+    }
+    .feature-card h3 {
+      font-size: 21px;
+      font-weight: 600;
+      margin: 0 0 12px;
+    }
+    .feature-card p {
+      font-size: 15px;
+      color: var(--muted);
+      margin: 0 auto;
+      max-width: 300px;
+    }
+
+    .table-wrap { overflow-x: auto; margin: 40px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      min-width: 600px;
+    }
+    thead { border-bottom: 1px solid var(--rule); }
+    th {
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--rule);
+      color: var(--ink);
+    }
+    tr:last-child td { border-bottom: none; }
+
+    footer {
+      padding: 40px 20px;
+      background: var(--bg-alt);
+      text-align: center;
+    }
+    footer p { font-size: 12px; color: var(--muted); }
+
+    @media (max-width: 768px) {
+      .site-nav { gap: 1.2rem; padding: 0 1rem; }
+      .hero { padding: 60px 20px 40px; }
+      .section { padding: 60px 20px; }
+      .section.bg-alt, .section.bg-dark { padding: 60px 20px; }
+      .feature-grid { grid-template-columns: 1fr; gap: 16px; }
+      .feature-card, .resource-card { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="../index.html">总览</a>
+    <a href="index.html">首页</a>
+    <a href="basics.html">基础概念</a>
+    <a href="programming.html">编程入门</a>
+    <a href="tools.html">工具应用</a>
+    <a href="projects.html">实战项目</a>
+    <a href="resources.html" class="active">学习资源</a>
+    <a href="course/index.html">课程体系</a>
+  </nav>
+
+  <div class="hero">
+    <h1>学习资源</h1>
+    <p class="subtitle">精选课程、书籍、社区和数据集，为你的 AI 学习之路导航</p>
+  </div>
+
+  <section class="section">
+    <h2>推荐课程</h2>
+    <p class="subtitle">系统学习，少走弯路</p>
+
+    <div class="resource-card">
+      <h4>吴恩达机器学习课程（Machine Learning by Andrew Ng）</h4>
+      <p>最经典的 AI 入门课。吴恩达教授用极其清晰的讲解，带你从零理解监督学习、非监督学习、神经网络等核心概念。Coursera 上有原版英文课，B 站有大量优质中文字幕版本。适合所有初学者作为第一门课。</p>
+    </div>
+
+    <div class="resource-card">
+      <h4>Fast.ai：面向程序员的深度学习（Practical Deep Learning for Coders）</h4>
+      <p>Fast.ai 的理念是"先动手，再理解"。课程直接带你用几行代码训练出世界级的图像分类器，然后在实践中逐步深入原理。适合有一定编程基础、喜欢从实践中学习的人。完全免费，官网 fast.ai。</p>
+    </div>
+
+    <div class="resource-card">
+      <h4>李宏毅机器学习（台湾大学）</h4>
+      <p>中文讲解最生动、最详细的机器学习课程。李宏毅教授擅长用动画和例子把复杂概念讲清楚，涵盖传统机器学习、深度学习、Transformer、生成式 AI 等。B 站搜索"李宏毅机器学习"即可找到完整课程。</p>
+    </div>
+
+    <div class="resource-card">
+      <h4>3Blue1Brown：神经网络系列（YouTube / B站）</h4>
+      <p>不是传统课程，而是一系列精美的动画视频。用视觉化的方式讲解反向传播、梯度下降、卷积神经网络等核心概念。如果你对学习理论感到困难，先看这些视频建立直觉，再学数学会轻松很多。</p>
+    </div>
+
+    <div class="resource-card">
+      <h4>Stanford CS224N：自然语言处理与深度学习</h4>
+      <p>想深入 NLP 方向的必读课程。从词向量到 Transformer 到预训练模型，系统覆盖自然语言处理的经典和前沿内容。课程网站提供完整的讲义、作业和代码。</p>
+    </div>
+  </section>
+
+  <section class="section bg-alt">
+    <div class="section-inner">
+      <h2>推荐书籍</h2>
+      <p class="subtitle">适合不同阶段的经典读物</p>
+
+      <div class="resource-card">
+        <h4>《深度学习》（Deep Learning）- Ian Goodfellow 等</h4>
+        <p>AI 领域的"圣经"，被业内称为"花书"。系统覆盖了深度学习的数学基础和算法原理，适合有一定基础后作为参考书精读。第一部分（基础数学）和第二部分（深度学习实践）对初学者最有价值。</p>
+      </div>
+
+      <div class="resource-card">
+        <h4>《动手学深度学习》（Dive into Deep Learning）- 李沐 等</h4>
+        <p>强烈推荐的入门书。每个章节都配有可运行的代码，边读边敲，真正"动手学"。覆盖从线性回归到 CNN、RNN、注意力机制的核心内容。有中文电子版（zh.d2l.ai），完全免费。</p>
+      </div>
+
+      <div class="resource-card">
+        <h4>《Python 数据科学手册》- Jake VanderPlas</h4>
+        <p>NumPy、Pandas、Matplotlib、Scikit-learn 的实战指南。如果你在做数据分析或机器学习项目，这本书是绝佳的工具书。代码示例丰富，即查即用。</p>
+      </div>
+
+      <div class="resource-card">
+        <h4>《机器学习实战：基于 Scikit-Learn 和 TensorFlow》</h4>
+        <p>兼顾理论和实践，前半部分讲传统机器学习算法及 Scikit-Learn 实现，后半部分讲神经网络和 TensorFlow。适合希望全面了解的读者。</p>
+      </div>
+
+      <div class="resource-card">
+        <h4>《人工智能简史》- 尼克</h4>
+        <p>如果你更想了解 AI 的发展脉络和人物故事，这是一本非常有趣的科普读物。从图灵、香农到深度学习三巨头，帮助你理解这个领域是如何一步步走到今天的。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>社区与论坛</h2>
+    <p class="subtitle">找到同伴，解决困惑，保持动力</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>GitHub</h3>
+        <p>全球最大的代码托管平台。搜索你感兴趣的论文或项目，通常能找到开源实现。关注优秀的 AI 开发者和组织（如 PyTorch、Hugging Face），能第一时间了解前沿动态。</p>
+      </div>
+      <div class="feature-card">
+        <h3>Hugging Face</h3>
+        <p>AI 界的 GitHub。提供海量预训练模型、数据集和工具库（Transformers、Datasets）。无论你是想直接用模型，还是学习最新技术，这里都是宝库。</p>
+      </div>
+      <div class="feature-card">
+        <h3>Papers With Code</h3>
+        <p>追踪最新论文和对应的开源代码实现。按领域分类（图像分类、目标检测、NLP 等），每个领域都有排行榜（SOTA），是了解前沿最佳实践的好地方。</p>
+      </div>
+      <div class="feature-card">
+        <h3>Kaggle</h3>
+        <p>数据科学竞赛平台。即使不参加竞赛，也可以学习别人公开的 Notebook（完整的数据分析 + 建模代码），下载数据集练手。社区非常活跃，适合实战学习。</p>
+      </div>
+      <div class="feature-card">
+        <h3>Reddit / LessWrong</h3>
+        <p>r/MachineLearning 是 Reddit 上最大的机器学习社区，每天有最新的论文讨论和行业动态。LessWrong 则偏重 AI 安全和对齐（Alignment）话题。</p>
+      </div>
+      <div class="feature-card">
+        <h3>中文社区</h3>
+        <p>知乎的"机器学习"话题、CSDN、掘金上有大量中文教程和经验分享。微信公众号"机器之心""量子位"每天推送最新 AI 新闻和论文解读。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-alt">
+    <div class="section-inner">
+      <h2>常用数据集</h2>
+      <p class="subtitle">好数据集是练手的关键</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>数据集</th><th>类型</th><th>规模</th><th>用途</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MNIST</td>
+              <td>图像</td>
+              <td>7万张 28x28 手写数字</td>
+              <td>入门图像分类</td>
+            </tr>
+            <tr>
+              <td>CIFAR-10</td>
+              <td>图像</td>
+              <td>6万张 32x32 彩色图片，10类</td>
+              <td>进阶图像分类</td>
+            </tr>
+            <tr>
+              <td>ImageNet</td>
+              <td>图像</td>
+              <td>1400万张，1000类</td>
+              <td>大规模图像识别、预训练</td>
+            </tr>
+            <tr>
+              <td>IMDB Reviews</td>
+              <td>文本</td>
+              <td>5万条电影评论</td>
+              <td>情感分析入门</td>
+            </tr>
+            <tr>
+              <td>WikiText-103</td>
+              <td>文本</td>
+              <td>1亿词，来自维基百科</td>
+              <td>语言模型训练</td>
+            </tr>
+            <tr>
+              <td>Titanic</td>
+              <td>表格</td>
+              <td>891条乘客记录</td>
+              <td>数据分析与预测入门</td>
+            </tr>
+            <tr>
+              <td>UCI ML Repository</td>
+              <td>综合</td>
+              <td>600+ 数据集</td>
+              <td>各类机器学习实验</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>值得关注的开源项目</h2>
+    <p class="subtitle">站在巨人的肩膀上</p>
+
+    <div class="resource-card">
+      <h4>PyTorch / TensorFlow</h4>
+      <p>两大主流深度学习框架。PyTorch 更灵活、调试方便，学术界和工业界新项目中使用更广泛；TensorFlow 在部署和生产环境中有优势。新手建议从 PyTorch 入手。</p>
+    </div>
+
+    <div class="resource-card">
+      <h4>Hugging Face Transformers</h4>
+      <p>让你用几行代码就能调用 BERT、GPT、T5 等数千个预训练模型。做 NLP 项目几乎必用的工具库。</p>
+    </div>
+
+    <div class="resource-card">
+      <h4>LangChain / LlamaIndex</h4>
+      <p>构建大模型应用的框架。LangChain 侧重链式调用和工具集成，LlamaIndex 侧重数据索引和检索（RAG）。</p>
+    </div>
+
+    <div class="resource-card">
+      <h4>Stable Diffusion WebUI / ComfyUI</h4>
+      <p>本地运行 Stable Diffusion 生成图像的工具。WebUI 适合新手，ComfyUI 的节点工作流适合进阶用户精细控制生成过程。</p>
+    </div>
+
+    <div class="resource-card">
+      <h4>Ollama</h4>
+      <p>在本地 Mac 或 Linux 电脑上轻松运行开源大模型（如 Llama 3、Mistral）。一条命令就能启动，保护隐私且无需联网。</p>
+    </div>
+  </section>
+
+  <section class="section bg-dark">
+    <div class="section-inner">
+      <h2>学习路线图</h2>
+      <p class="subtitle">一个可供参考的 6 个月学习计划</p>
+      <div class="feature-grid">
+        <div class="feature-card" style="background:#1d1d1f;">
+          <h3 style="color:#f5f5f7;">第 1-2 月</h3>
+          <p style="color:#a1a1a6;">Python 基础 + NumPy/Pandas。完成吴恩达机器学习前 4 周。了解 AI 基本概念。</p>
+        </div>
+        <div class="feature-card" style="background:#1d1d1f;">
+          <h3 style="color:#f5f5f7;">第 3-4 月</h3>
+          <p style="color:#a1a1a6;">学习 PyTorch，完成《动手学深度学习》前 7 章。实现 MNIST 和猫狗分类项目。</p>
+        </div>
+        <div class="feature-card" style="background:#1d1d1f;">
+          <h3 style="color:#f5f5f7;">第 5-6 月</h3>
+          <p style="color:#a1a1a6;">选一个方向深入（NLP / CV / 大模型应用）。复现一个经典论文或参加一次 Kaggle 比赛。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p style="font-size: 13px; color: #86868b; margin-bottom: 8px;">
+      <a href="../index.html">首页</a> ·
+      <a href="../mac-mini-guide/mac-mini-guide.html">Mac 指南</a> ·
+      <a href="../ai-guide/index.html">AI 学习</a> ·
+      <a href="../ai-guide/course/index.html">课程框架</a> ·
+      <a href="../fun-physics/index.html">趣味物理</a> ·
+      <a href="../mac-mini-guide/credits.html">内容声明</a>
+    </p>
+    <p style="font-size: 11px; color: #86868b;">Generated by Trae Work · 内容仅供学习交流</p>
+  </footer>
+
+</body>
+</html>

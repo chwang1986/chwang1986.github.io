@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="从零开始学人工智能。不需要高数背景，不需要昂贵的设备，只需要好奇心和这份指南。">
+  <meta name="keywords" content="ChatGPT, Python, 机器学习, 深度学习, 大模型, Mac, AI, 人工智能, 物理学, 学习笔记, 教程">
+  <meta property="og:title" content="AI入门与提高 - 从零开始学人工智能">
+  <meta property="og:description" content="从零开始学人工智能。不需要高数背景，不需要昂贵的设备，只需要好奇心和这份指南。">
+  <meta property="og:type" content="website">
+  <meta name="author" content="Trae Work">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI入门与提高 - 从零开始学人工智能</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f5f5f7;
+      --ink: #1d1d1f;
+      --muted: #86868b;
+      --rule: #d2d2d7;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+      --font: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --font-mono: 'SF Mono', 'JetBrains Mono', monospace;
+      --max: 980px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      padding: 0 2rem;
+      height: 52px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .site-nav a {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+    .site-nav a:hover { color: #ffffff; }
+    .site-nav a.active { color: #ffffff; font-weight: 500; }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      background: var(--bg);
+    }
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .hero .subtitle {
+      font-size: clamp(19px, 2.5vw, 28px);
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.4;
+      font-weight: 400;
+    }
+    .hero-img-wrap {
+      margin-top: 60px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .hero-img {
+      width: 100%;
+      max-width: 1200px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 20px;
+    }
+
+    .section {
+      padding: 100px 20px;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section.bg-alt {
+      background: var(--bg-alt);
+      max-width: 100%;
+      padding: 100px 20px;
+    }
+    .section.bg-alt .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section.bg-dark {
+      background: #000000;
+      max-width: 100%;
+      padding: 100px 20px;
+    }
+    .section.bg-dark .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section.bg-dark h2,
+    .section.bg-dark h3,
+    .section.bg-dark p,
+    .section.bg-dark li { color: #f5f5f7; }
+    .section.bg-dark .subtitle { color: #a1a1a6; }
+
+    .section h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .section .subtitle {
+      font-size: clamp(17px, 2vw, 21px);
+      color: var(--muted);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px;
+      line-height: 1.4;
+    }
+    .section h3 {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin: 48px 0 16px;
+      color: var(--ink);
+    }
+    .section p {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--ink);
+      margin-bottom: 16px;
+      max-width: 680px;
+    }
+    .section ul, .section ol {
+      margin: 0 0 20px 24px;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .section li {
+      margin-bottom: 12px;
+      max-width: 680px;
+    }
+    .section strong { font-weight: 600; color: var(--ink); }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 60px;
+    }
+    .feature-card {
+      background: var(--bg);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+    }
+    .feature-card h3 {
+      font-size: 21px;
+      font-weight: 600;
+      margin: 0 0 12px;
+    }
+    .feature-card p {
+      font-size: 15px;
+      color: var(--muted);
+      margin: 0 auto;
+      max-width: 300px;
+    }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: rgba(0, 0, 0, 0.05);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--ink);
+    }
+    pre {
+      background: #1d1d1f;
+      color: #f5f5f7;
+      padding: 24px;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 24px 0;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 680px;
+    }
+    pre code {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+    }
+
+    .table-wrap { overflow-x: auto; margin: 40px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      min-width: 600px;
+    }
+    thead { border-bottom: 1px solid var(--rule); }
+    th {
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--rule);
+      color: var(--ink);
+    }
+    tr:last-child td { border-bottom: none; }
+
+    .tips-list {
+      list-style: none;
+      margin-left: 0;
+      margin-top: 40px;
+    }
+    .tips-list li {
+      padding-left: 28px;
+      position: relative;
+      margin-bottom: 16px;
+      font-size: 17px;
+      max-width: 680px;
+    }
+    .tips-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 980px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: var(--accent-hover); }
+
+    .cta-wrap { text-align: center; margin-top: 40px; }
+
+    footer {
+      padding: 40px 20px;
+      background: var(--bg-alt);
+      text-align: center;
+    }
+    footer p { font-size: 12px; color: var(--muted); }
+
+    @media (max-width: 768px) {
+      .site-nav { gap: 1.2rem; padding: 0 1rem; }
+      .hero { padding: 60px 20px 40px; }
+      .section { padding: 60px 20px; }
+      .section.bg-alt, .section.bg-dark { padding: 60px 20px; }
+      .hero-img-wrap { margin-top: 40px; }
+      .feature-grid { grid-template-columns: 1fr; gap: 16px; }
+      .feature-card { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="../index.html">总览</a>
+    <a href="index.html" class="active">首页</a>
+    <a href="basics.html">基础概念</a>
+    <a href="programming.html">编程入门</a>
+    <a href="tools.html">工具应用</a>
+    <a href="projects.html">实战项目</a>
+    <a href="resources.html">学习资源</a>
+    <a href="course/index.html">课程体系</a>
+  </nav>
+
+  <div class="hero">
+    <h1>AI 入门与提高</h1>
+    <p class="subtitle">从零开始学人工智能。不需要高数背景，不需要昂贵的设备，只需要好奇心和这份指南。</p>
+    <div class="hero-img-wrap">
+      <img src="assets/hero-ai.jpg" alt="AI 学习概念图" class="hero-img">
+    </div>
+  </div>
+
+  <section class="section">
+    <h2>什么是人工智能？</h2>
+    <p class="subtitle">用最简单的话说，AI 就是教计算机像人一样思考和做事</p>
+    <p>人工智能（Artificial Intelligence，简称 AI）并不是一个新概念。早在 1956 年，科学家们就在达特茅斯会议上首次提出了这个词。简单来说，AI 的目标是<strong>让机器表现出需要人类智能才能完成的行为</strong>——比如理解语言、识别图像、下棋、开车，甚至创作诗歌和绘画。</p>
+    <p>不过，AI 并不等同于"像人一样思考"。现在的 AI 更多是一种强大的<strong>模式识别工具</strong>：它从海量数据中学习规律，然后用这些规律来做预测、分类或生成内容。你手机里的面容识别、每天刷的短视频推荐、常用的语音助手，背后都是 AI 在运作。</p>
+    <p>AI 可以分为两大类：<strong>狭义 AI</strong>（专注解决特定问题，如识别猫狗、翻译语言）和<strong>通用 AI</strong>（像人一样什么都能做，目前还未实现）。我们今天接触到的所有 AI，包括 ChatGPT，都属于狭义 AI。</p>
+  </section>
+
+  <section class="section bg-alt">
+    <div class="section-inner">
+      <h2>为什么现在学 AI？</h2>
+      <p class="subtitle">AI 正在重塑每一个行业，早一步了解，就多一分主动权</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>就业市场需求大</h3>
+          <p>AI 工程师、数据科学家、算法研究员等岗位需求持续增长，平均薪资远高于传统 IT 岗位。即使非技术岗位，懂 AI 也是加分项。</p>
+        </div>
+        <div class="feature-card">
+          <h3>工具越来越易用</h3>
+          <p>十年前学 AI 需要深厚的数学功底和昂贵的计算资源。如今，借助 PyTorch、Hugging Face 和各类云平台，普通人也能训练和部署模型。</p>
+        </div>
+        <div class="feature-card">
+          <h3>提升个人效率</h3>
+          <p>无论是用 ChatGPT 辅助写作，还是用 AI 做数据分析和 PPT，掌握 AI 工具能让你的工作效率提升数倍。</p>
+        </div>
+        <div class="feature-card">
+          <h3>把握时代红利</h3>
+          <p>就像 20 年前的互联网一样，AI 是当下最大的技术浪潮。越早了解它的原理和边界，越能在变革中找到机会。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>找到适合你的学习路径</h2>
+    <p class="subtitle">无论你是什么背景，都可以从这里开始</p>
+
+    <h3>路径一：完全零基础</h3>
+    <p>你可能连 Python 都没听过，也不用担心。建议从<strong>AI 工具应用</strong>开始，先体验 AI 能做什么：用 ChatGPT 聊天、用 Midjourney 画图、用剪映的 AI 功能剪视频。建立直觉后，再学习基础概念，最后视需求决定是否学编程。</p>
+    <ul>
+      <li>第一步：阅读本站 <a href="tools.html">工具应用</a> 页面，学会使用主流 AI 工具</li>
+      <li>第二步：阅读 <a href="basics.html">基础概念</a>，理解 AI 的核心原理</li>
+      <li>第三步：如果想深入，从 <a href="programming.html">编程入门</a> 开始学习 Python</li>
+    </ul>
+
+    <h3>路径二：会一点编程</h3>
+    <p>如果你已经会写一些 Python，或者有其他编程语言基础，那么学习 AI 的门槛会低很多。建议直接上手 PyTorch，边做项目边学理论。</p>
+    <ul>
+      <li>第一步：快速浏览 <a href="basics.html">基础概念</a>，补齐 AI 专属知识</li>
+      <li>第二步：跟随 <a href="programming.html">编程入门</a> 配置环境，学习 PyTorch 基础</li>
+      <li>第三步：挑一个 <a href="projects.html">实战项目</a> 动手实现</li>
+    </ul>
+
+    <h3>路径三：想转行做 AI</h3>
+    <p>如果你希望从事 AI 相关职业，需要更系统地学习。建议以吴恩达的机器学习课程为骨架，辅以书籍和开源项目，逐步建立完整的知识体系。</p>
+    <ul>
+      <li>第一步：完成 <a href="resources.html">学习资源</a> 中推荐的吴恩达机器学习课程</li>
+      <li>第二步：精读《动手学深度学习》，完成课后习题</li>
+      <li>第三步：复现 2-3 个经典论文或开源项目，积累作品集</li>
+      <li>第四步：参加 Kaggle 竞赛或贡献开源项目，丰富简历</li>
+    </ul>
+
+    <h3>路径四：想提升效率的职场人</h3>
+    <p>你不需要成为 AI 专家，只需要知道如何用好 AI 工具。重点学习提示词工程（Prompt Engineering）和办公自动化，让 AI 成为你的私人助理。</p>
+    <ul>
+      <li>第一步：学会高效使用 ChatGPT / Claude / Kimi，掌握提示词技巧</li>
+      <li>第二步：了解如何在 Excel、Word、PPT 中接入 AI 功能</li>
+      <li>第三步：探索 AI 在垂直场景的应用，如法律、财务、设计等</li>
+    </ul>
+  </section>
+
+  <section class="section bg-dark">
+    <div class="section-inner">
+      <h2>开始学习</h2>
+      <p class="subtitle">选择一个方向，立即迈出第一步</p>
+      <div class="feature-grid">
+        <div class="feature-card" style="background:#1d1d1f;">
+          <h3 style="color:#f5f5f7;">基础概念</h3>
+          <p style="color:#a1a1a6;">理解机器学习、深度学习和大语言模型的本质</p>
+          <div class="cta-wrap"><a href="basics.html" class="btn">去探索</a></div>
+        </div>
+        <div class="feature-card" style="background:#1d1d1f;">
+          <h3 style="color:#f5f5f7;">编程入门</h3>
+          <p style="color:#a1a1a6;">搭建环境，写出你的第一个神经网络</p>
+          <div class="cta-wrap"><a href="programming.html" class="btn">去编程</a></div>
+        </div>
+        <div class="feature-card" style="background:#1d1d1f;">
+          <h3 style="color:#f5f5f7;">工具应用</h3>
+          <p style="color:#a1a1a6;">不用写代码，也能让 AI 为你工作</p>
+          <div class="cta-wrap"><a href="tools.html" class="btn">去应用</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p style="font-size: 13px; color: #86868b; margin-bottom: 8px;">
+      <a href="../index.html">首页</a> ·
+      <a href="../mac-mini-guide/mac-mini-guide.html">Mac 指南</a> ·
+      <a href="../ai-guide/index.html">AI 学习</a> ·
+      <a href="../ai-guide/course/index.html">课程框架</a> ·
+      <a href="../fun-physics/index.html">趣味物理</a> ·
+      <a href="../mac-mini-guide/credits.html">内容声明</a>
+    </p>
+    <p style="font-size: 11px; color: #86868b;">Generated by Trae Work · 内容仅供学习交流</p>
+  </footer>
+
+</body>
+</html>

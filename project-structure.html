@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>项目文件结构总览</title>
+  <meta name="description" content="项目文件结构总览 — Trae Work 学习笔记">
+  <meta name="keywords" content="Mac, AI, 人工智能, 物理学, 学习笔记">
+  <meta property="og:title" content="项目文件结构总览">
+  <meta property="og:description" content="项目文件结构总览 — Trae Work 学习笔记">
+  <meta property="og:type" content="website">
+  <meta name="author" content="Trae Work">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f5f5f7;
+      --ink: #1d1d1f;
+      --muted: #86868b;
+      --rule: #d2d2d7;
+      --accent: #0071e3;
+      --font: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --font-mono: 'SF Mono', 'JetBrainsMono', monospace;
+      --max: 780px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .site-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      padding: 0 2rem;
+      height: 52px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .site-nav a {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+    .site-nav a:hover { color: #ffffff; }
+    .site-nav a.active { color: #ffffff; font-weight: 500; }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: var(--bg);
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .hero .subtitle {
+      font-size: clamp(17px, 2vw, 21px);
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .content {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+    .content h1 {
+      font-size: 32px;
+      font-weight: 600;
+      margin: 48px 0 20px;
+      letter-spacing: -0.015em;
+    }
+    .content h2 {
+      font-size: 26px;
+      font-weight: 600;
+      margin: 40px 0 16px;
+      letter-spacing: -0.015em;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .content h3 {
+      font-size: 21px;
+      font-weight: 600;
+      margin: 32px 0 12px;
+    }
+    .content h4 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 24px 0 10px;
+    }
+    .content p {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+    .content ul, .content ol {
+      margin: 0 0 20px 24px;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .content li {
+      margin-bottom: 8px;
+    }
+    .content blockquote {
+      border-left: 4px solid var(--accent);
+      padding-left: 16px;
+      margin: 20px 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .content code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: rgba(0, 0, 0, 0.05);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .content pre {
+      background: #1d1d1f;
+      color: #f5f5f7;
+      padding: 20px;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 20px 0;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .content pre code {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+    }
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      margin: 24px 0;
+    }
+    .content th, .content td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--rule);
+    }
+    .content th {
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+    .content tr:last-child td {
+      border-bottom: none;
+    }
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 40px 0;
+    }
+    .content a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .content a:hover {
+      text-decoration: underline;
+    }
+    .content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 16px 0;
+    }
+    .content strong {
+      font-weight: 600;
+    }
+
+    footer {
+      padding: 40px 20px;
+      background: var(--bg-alt);
+      text-align: center;
+    }
+    footer p {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .site-nav { gap: 1.2rem; padding: 0 1rem; }
+      .hero { padding: 40px 20px 30px; }
+      .content { padding: 30px 20px 60px; }
+      .content h1 { font-size: 26px; }
+      .content h2 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav">
+    <a href="./index.html">首页</a>
+    <a href="./mac-mini-guide/mac-mini-guide.html">Mac 指南</a>
+    <a href="./ai-guide/index.html">AI 学习</a>
+    <a href="./ai-guide/course/index.html">课程框架</a>
+    <a href="./fun-physics/index.html">趣味物理</a>
+  </nav>
+
+  <div class="hero">
+    <h1>项目文件结构总览</h1>
+    <p class="subtitle">学习笔记与知识整理</p>
+  </div>
+  <div class="content">
+<h1 id="_1">项目文件结构总览</h1>
+<blockquote>
+<p>生成时间：2026-07-03
+所有网站均采用 Apple 风格设计（大字体、留白、半透明导航栏、交替背景）</p>
+</blockquote>
+<pre><code>trae_workhome/
+├── Mac-mini-入门教程.md
+├── project-structure.md
+├── ai-guide/
+│   ├── index.html              → AI学习首页（学习路径概览）
+│   ├── basics.html             → AI基础概念（机器学习/深度学习/大模型）
+│   ├── programming.html        → AI编程入门（Python/PyTorch/MNIST实战）
+│   ├── tools.html              → AI工具应用（ChatGPT/Claude/图像生成）
+│   ├── projects.html           → 实战项目（5个由易到难的项目）
+│   ├── resources.html          → 学习资源（课程/书籍/社区/数据集）
+│   ├── assets/
+│   │   └── hero-ai.jpg
+│   └── _shared/
+│       └── fonts/
+│           ├── JetBrainsMono-Regular.ttf
+│           ├── WorkSans-Bold.ttf
+│           ├── WorkSans-Regular.ttf
+│           └── YoungSerif-Regular.ttf
+│
+├── fun-physics/
+│   ├── index.html              → 首页（为什么物理学有趣）
+│   ├── mechanics.html          → 力学世界（牛顿定律/能量守恒）
+│   ├── thermodynamics.html     → 热学奥秘（熵/热力学定律）
+│   ├── electromagnetism.html   → 电磁魔法（电磁波/光）
+│   ├── quantum.html            → 量子世界（波粒二象性/量子纠缠）
+│   ├── relativity.html         → 相对论时空（时间膨胀/质能方程）
+│   ├── daily-life.html         → 生活中的物理（彩虹/WiFi/飞机等）
+│   ├── shared.css
+│   ├── assets/
+│   │   └── hero-physics.jpg
+│   └── _shared/
+│       └── fonts/
+│           ├── JetBrainsMono-Regular.ttf
+│           ├── WorkSans-Bold.ttf
+│           ├── WorkSans-Regular.ttf
+│           └── YoungSerif-Regular.ttf
+│
+└── mac-mini-guide/
+    ├── mac-mini-guide.html     → 入门教程（首页）
+    ├── roadmap.html            → 6周学习路线图（有序）
+    ├── cheatsheet.html         → 速查参考卡片（有效）
+    ├── accessories.html        → 配件推荐
+    ├── apps.html               → 应用推荐
+    ├── bad-habits.html         → 坏习惯说明
+    ├── personal-guide.html     → 个人用户指南
+    ├── team-coding.html        → 集体编程指南
+    ├── ai-coding.html          → Mac AI 指南（编程+日常）
+    ├── ai-learning.html        → AI 学习路径
+    ├── credits.html            → 内容声明页
+    ├── assets/
+    │   ├── hero-guide.jpg
+    │   ├── hero-accessories.jpg
+    │   ├── hero-apps.jpg
+    │   ├── hero-bad-habits.jpg
+    │   ├── hero-personal.jpg
+    │   ├── hero-team.jpg
+    │   ├── hero-ai.jpg
+    │   ├── hero-learning.jpg
+    │   └── hero-roadmap.jpg
+    └── _shared/
+        ├── fonts/
+        │   ├── JetBrainsMono-Regular.ttf
+        │   ├── WorkSans-Bold.ttf
+        │   ├── WorkSans-Regular.ttf
+        │   └── YoungSerif-Regular.ttf
+        └── js/
+</code></pre>
+<hr />
+<h2 id="_2">网站一览</h2>
+<table>
+<thead>
+<tr>
+<th>网站</th>
+<th>页面数</th>
+<th>主题</th>
+<th>目标读者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mac mini 指南</strong></td>
+<td>12 页</td>
+<td>Mac 入门、配件、应用、AI、编程协作</td>
+<td>Mac 新用户</td>
+</tr>
+<tr>
+<td><strong>AI 入门与提高</strong></td>
+<td>6 页</td>
+<td>从 AI 概念到编程实战再到工具应用</td>
+<td>AI 初学者、转行者</td>
+</tr>
+<tr>
+<td><strong>趣味物理学</strong></td>
+<td>7 页</td>
+<td>力/热/电磁/量子/相对论/生活物理</td>
+<td>普通读者、学生</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3">共享资源</h2>
+<p>三个网站共用同一套 Apple 风格字体：
+- <strong>YoungSerif</strong> — 标题展示字体
+- <strong>WorkSans</strong> — 正文阅读字体（Regular + Bold）
+- <strong>JetBrainsMono</strong> — 代码等宽字体</p>
+  </div>
+  <footer>
+    <p>
+      <a href="./index.html">首页</a> ·
+      <a href="./mac-mini-guide/mac-mini-guide.html">Mac 指南</a> ·
+      <a href="./ai-guide/index.html">AI 学习</a> ·
+      <a href="./ai-guide/course/index.html">课程框架</a> ·
+      <a href="./fun-physics/index.html">趣味物理</a> ·
+      <a href="./mac-mini-guide/credits.html">内容声明</a>
+    </p>
+    <p style="margin-top:8px; font-size:11px; color:#86868b;">Generated by Trae Work · 内容仅供学习交流</p>
+  </footer>
+</body>
+</html>

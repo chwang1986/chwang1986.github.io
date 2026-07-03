@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="用通俗的类比理解机器学习和深度学习，不需要高数也能听懂">
+  <meta name="keywords" content="ChatGPT, Python, 机器学习, 深度学习, 大模型, Mac, AI, 人工智能, 物理学, 学习笔记, 教程">
+  <meta property="og:title" content="AI基础概念 - AI入门与提高">
+  <meta property="og:description" content="用通俗的类比理解机器学习和深度学习，不需要高数也能听懂">
+  <meta property="og:type" content="website">
+  <meta name="author" content="Trae Work">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI基础概念 - AI入门与提高</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f5f5f7;
+      --ink: #1d1d1f;
+      --muted: #86868b;
+      --rule: #d2d2d7;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+      --font: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --font-mono: 'SF Mono', 'JetBrains Mono', monospace;
+      --max: 980px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      padding: 0 2rem;
+      height: 52px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .site-nav a {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+    .site-nav a:hover { color: #ffffff; }
+    .site-nav a.active { color: #ffffff; font-weight: 500; }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      background: var(--bg);
+    }
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .hero .subtitle {
+      font-size: clamp(19px, 2.5vw, 28px);
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.4;
+      font-weight: 400;
+    }
+
+    .section {
+      padding: 100px 20px;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section.bg-alt {
+      background: var(--bg-alt);
+      max-width: 100%;
+      padding: 100px 20px;
+    }
+    .section.bg-alt .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section.bg-dark {
+      background: #000000;
+      max-width: 100%;
+      padding: 100px 20px;
+    }
+    .section.bg-dark .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section.bg-dark h2,
+    .section.bg-dark h3,
+    .section.bg-dark p,
+    .section.bg-dark li { color: #f5f5f7; }
+    .section.bg-dark .subtitle { color: #a1a1a6; }
+
+    .section h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .section .subtitle {
+      font-size: clamp(17px, 2vw, 21px);
+      color: var(--muted);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px;
+      line-height: 1.4;
+    }
+    .section h3 {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin: 48px 0 16px;
+      color: var(--ink);
+    }
+    .section p {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--ink);
+      margin-bottom: 16px;
+      max-width: 680px;
+    }
+    .section ul, .section ol {
+      margin: 0 0 20px 24px;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .section li {
+      margin-bottom: 12px;
+      max-width: 680px;
+    }
+    .section strong { font-weight: 600; color: var(--ink); }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 60px;
+    }
+    .feature-card {
+      background: var(--bg);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+    }
+    .feature-card h3 {
+      font-size: 21px;
+      font-weight: 600;
+      margin: 0 0 12px;
+    }
+    .feature-card p {
+      font-size: 15px;
+      color: var(--muted);
+      margin: 0 auto;
+      max-width: 300px;
+    }
+
+    .analogy-box {
+      background: #f0f7ff;
+      border-left: 4px solid var(--accent);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+      max-width: 680px;
+    }
+    .analogy-box p { margin-bottom: 8px; }
+    .analogy-box p:last-child { margin-bottom: 0; }
+    .analogy-box strong { color: var(--accent); }
+
+    .table-wrap { overflow-x: auto; margin: 40px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      min-width: 600px;
+    }
+    thead { border-bottom: 1px solid var(--rule); }
+    th {
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--rule);
+      color: var(--ink);
+    }
+    tr:last-child td { border-bottom: none; }
+
+    footer {
+      padding: 40px 20px;
+      background: var(--bg-alt);
+      text-align: center;
+    }
+    footer p { font-size: 12px; color: var(--muted); }
+
+    @media (max-width: 768px) {
+      .site-nav { gap: 1.2rem; padding: 0 1rem; }
+      .hero { padding: 60px 20px 40px; }
+      .section { padding: 60px 20px; }
+      .section.bg-alt, .section.bg-dark { padding: 60px 20px; }
+      .feature-grid { grid-template-columns: 1fr; gap: 16px; }
+      .feature-card { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="../index.html">总览</a>
+    <a href="index.html">首页</a>
+    <a href="basics.html" class="active">基础概念</a>
+    <a href="programming.html">编程入门</a>
+    <a href="tools.html">工具应用</a>
+    <a href="projects.html">实战项目</a>
+    <a href="resources.html">学习资源</a>
+    <a href="course/index.html">课程体系</a>
+  </nav>
+
+  <div class="hero">
+    <h1>AI 基础概念</h1>
+    <p class="subtitle">用通俗的类比理解机器学习和深度学习，不需要高数也能听懂</p>
+  </div>
+
+  <section class="section">
+    <h2>机器学习 vs 深度学习 vs 强化学习</h2>
+    <p class="subtitle">这三者是 AI 领域的三大支柱，各有侧重</p>
+
+    <h3>机器学习（Machine Learning）</h3>
+    <p>机器学习是 AI 的一个分支，核心思想是<strong>让计算机从数据中学习规律，而不是靠人类逐行编写规则</strong>。你可以把它想象成教小孩认动物：你给他看很多猫和狗的照片，并告诉他哪个是猫、哪个是狗。看多了，他自己就能分辨了。</p>
+    <div class="analogy-box">
+      <p><strong>类比：</strong>就像一位经验丰富的老中医。他看过成千上万的病人，积累了对症状的直觉，见到新病人时，能根据经验做出判断。</p>
+    </div>
+    <p>机器学习有很多经典算法，比如决策树、支持向量机（SVM）、随机森林等。它们在数据量不大、特征明显的场景下效果很好，比如垃圾邮件过滤、信用评分、房价预测等。</p>
+
+    <h3>深度学习（Deep Learning）</h3>
+    <p>深度学习是机器学习的一个子集，灵感来自人脑的神经网络。它的特点是使用<strong>多层神经网络</strong>来自动提取数据的特征。传统机器学习需要人工设计特征（比如识别猫时要告诉计算机"耳朵是尖的""有胡须"），而深度学习让网络自己学会这些特征。</p>
+    <div class="analogy-box">
+      <p><strong>类比：</strong>想象一个多层筛子。沙子从顶部倒入，每一层筛子过滤出不同大小的颗粒。深度学习就像这个筛子系统，每一层"神经网络"提取出数据的不同层次特征——从简单的线条、边缘，到复杂的形状、物体。</p>
+    </div>
+    <p>深度学习在图像识别、语音识别、自然语言处理等领域取得了突破性进展。但它需要大量数据和计算资源，而且模型就像一个"黑箱"——我们很难解释它为什么做出某个决定。</p>
+
+    <h3>强化学习（Reinforcement Learning）</h3>
+    <p>强化学习走的是另一条路：不直接告诉机器正确答案，而是让它通过<strong>试错</strong>来学习。机器在一个环境中做出动作，根据结果获得奖励或惩罚，目标是最大化长期奖励。</p>
+    <div class="analogy-box">
+      <p><strong>类比：</strong>训练小狗坐下。你说"坐下"，小狗随机做出各种动作。当它偶然坐下时，你给它零食（奖励）；站起来时，你不给（惩罚）。经过反复尝试，它学会了听到指令就坐下。</p>
+    </div>
+    <p>强化学习最著名的应用是 AlphaGo 击败围棋世界冠军，以及游戏 AI（如 OpenAI Five 打 Dota）。它也用在机器人控制、自动驾驶和推荐系统中。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>维度</th><th>机器学习</th><th>深度学习</th><th>强化学习</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>数据需求</td><td>较少</td><td>大量</td><td>通过交互生成</td></tr>
+          <tr><td>特征处理</td><td>需要人工设计</td><td>自动提取</td><td>状态表示即可</td></tr>
+          <tr><td>计算资源</td><td>普通电脑即可</td><td>需要 GPU</td><td>通常需要大量算力</td></tr>
+          <tr><td>典型应用</td><td>信用评分、推荐系统</td><td>图像识别、语音识别</td><td>游戏 AI、机器人</td></tr>
+          <tr><td>可解释性</td><td>较好</td><td>较差（黑箱）</td><td>中等</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section bg-alt">
+    <div class="section-inner">
+      <h2>神经网络简介</h2>
+      <p class="subtitle">理解 AI 的"大脑"是如何工作的</p>
+
+      <h3>从神经元到神经网络</h3>
+      <p>人脑约有 860 亿个神经元，它们通过突触相互连接。一个神经元接收来自其他神经元的信号，当信号强度超过某个阈值时，它就会"激活"，把信号传递给下一个神经元。</p>
+      <p>人工神经网络（Artificial Neural Network, ANN）就是对这个过程的数学模拟。它由三层组成：</p>
+      <ul>
+        <li><strong>输入层：</strong>接收原始数据，比如一张图片的像素值，或一句话的词向量</li>
+        <li><strong>隐藏层：</strong>对数据进行变换和特征提取，层数越多，网络"越深"</li>
+        <li><strong>输出层：</strong>给出最终结果，比如"这是猫"的概率是 95%</li>
+      </ul>
+
+      <h3>关键的数学概念（别怕，很直观）</h3>
+      <p>每个连接都有一个<strong>权重（Weight）</strong>，表示这个连接的重要性。网络的学习过程，本质上就是不断调整这些权重，让输出越来越接近正确答案。调整的依据是<strong>损失函数（Loss Function）</strong>——它衡量了"预测结果"和"真实答案"之间的差距。</p>
+      <p>训练过程就像一个学生在考试：做题（前向传播）→ 对答案（计算损失）→ 复盘纠错（反向传播）→ 下次做得更好（更新权重）。成千上万轮迭代后，网络就学会了。</p>
+
+      <h3>卷积神经网络（CNN）和循环神经网络（RNN）</h3>
+      <p>普通的神经网络适合处理表格数据，但对图像和文本不够高效。于是科学家们设计了专门的架构：</p>
+      <ul>
+        <li><strong>CNN（卷积神经网络）：</strong>专为图像设计。它用"卷积核"在图片上滑动，自动检测边缘、纹理、形状等特征。手机相册自动分类人脸、医学影像诊断都靠它。</li>
+        <li><strong>RNN（循环神经网络）：</strong>专为序列数据设计（如文本、语音、时间序列）。它有"记忆"，能处理上下文关系。不过传统 RNN 有长期记忆问题，因此后来发展出了 <strong>LSTM</strong> 和 <strong>GRU</strong> 等改进版本。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>大语言模型原理</h2>
+    <p class="subtitle">ChatGPT 背后的技术是怎么让机器学会说话的？</p>
+
+    <h3>从"猜下一个词"开始</h3>
+    <p>大语言模型（Large Language Model, LLM）的核心任务出奇地简单：<strong>给定前面的词，预测下一个词是什么</strong>。比如看到"今天天气很"，模型要猜出"好""热""糟糕"等词的概率分布。</p>
+    <p>但别小看这个任务。当模型看过互联网上数千亿个词后，它学会的不仅仅是语法和词汇，还有常识、推理能力、甚至是某种程度的世界模型。</p>
+
+    <h3>Transformer：革命性的架构</h3>
+    <p>2017 年，Google 发表了论文《Attention Is All You Need》，提出了 <strong>Transformer</strong> 架构。它抛弃了传统的循环结构，改用<strong>自注意力机制（Self-Attention）</strong>，让模型能同时看到句子中的所有词，并理解它们之间的关系。</p>
+    <div class="analogy-box">
+      <p><strong>类比：</strong>读一句话时，你会自动关注重要的词。比如"猫坐在垫子上，因为它很温暖"，看到"它"时，你的大脑会自动关联到"垫子"而不是"猫"——这就是注意力机制在做的事。</p>
+    </div>
+
+    <h3>预训练 + 微调</h3>
+    <p>大语言模型的训练分为两个阶段：</p>
+    <ul>
+      <li><strong>预训练（Pre-training）：</strong>用海量无标注文本（如网页、书籍、代码）训练模型，让它学会语言的基本规律。这个阶段非常昂贵，通常只有大公司能做。</li>
+      <li><strong>微调（Fine-tuning）：</strong>在预训练好的模型基础上，用特定领域的数据（如医疗问答、法律文书）进一步训练，让它更适合具体任务。</li>
+    </ul>
+    <p>ChatGPT 还引入了一个关键步骤：<strong>RLHF（基于人类反馈的强化学习）</strong>。模型生成多个回答，人类标注员对回答质量打分，模型根据这些反馈进一步优化，最终变得更符合人类偏好——更有帮助、更诚实、更无害。</p>
+  </section>
+
+  <section class="section bg-alt">
+    <div class="section-inner">
+      <h2>AI 能做什么，不能做什么</h2>
+      <p class="subtitle">了解 AI 的能力边界，才能用好它</p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>AI 擅长的事</h3>
+          <p style="text-align:left; max-width:100%;">
+            - 模式识别（图像分类、语音识别）<br>
+            - 大规模数据处理和分析<br>
+            - 文本生成和翻译<br>
+            - 重复性任务的自动化<br>
+            - 在明确规则下的决策<br>
+            - 24 小时不间断工作
+          </p>
+        </div>
+        <div class="feature-card">
+          <h3>AI 不擅长的事</h3>
+          <p style="text-align:left; max-width:100%;">
+            - 真正的创造力和原创性思维<br>
+            - 理解语境中的细微情感和文化差异<br>
+            - 道德判断和价值取舍<br>
+            - 物理世界的精细操作（如手术）<br>
+            - 应对完全陌生的场景<br>
+            - 为行为承担法律责任
+          </p>
+        </div>
+      </div>
+
+      <h3>重要提醒：AI 会犯错</h3>
+      <p>大语言模型有一个著名的问题叫<strong>"幻觉"（Hallucination）</strong>——它会自信地编造看似合理但实际上错误的信息。比如虚构不存在的论文、编造历史事件、给出错误的医学建议。因此，<strong>永远不要把 AI 的输出当作绝对真理</strong>，尤其在涉及健康、法律、财务等关键决策时。</p>
+      <p>AI 是一个强大的工具，但不是万能的。最好的方式是把它当作一个聪明但偶尔会犯错的助手：让它帮你整理思路、提供参考、加速执行，但最终的判断和责任始终在你。</p>
+    </div>
+  </section>
+
+  <footer>
+    <p style="font-size: 13px; color: #86868b; margin-bottom: 8px;">
+      <a href="../index.html">首页</a> ·
+      <a href="../mac-mini-guide/mac-mini-guide.html">Mac 指南</a> ·
+      <a href="../ai-guide/index.html">AI 学习</a> ·
+      <a href="../ai-guide/course/index.html">课程框架</a> ·
+      <a href="../fun-physics/index.html">趣味物理</a> ·
+      <a href="../mac-mini-guide/credits.html">内容声明</a>
+    </p>
+    <p style="font-size: 11px; color: #86868b;">Generated by Trae Work · 内容仅供学习交流</p>
+  </footer>
+
+</body>
+</html>
