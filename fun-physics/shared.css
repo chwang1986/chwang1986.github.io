@@ -1,6 +1,6 @@
 :root {
-  --bg: #ffffff;
-  --bg-alt: #f5f5f7;
+  --bg: #f5f5f7;
+  --bg-alt: #ffffff;
   --ink: #1d1d1f;
   --muted: #86868b;
   --rule: #d2d2d7;
@@ -28,9 +28,10 @@ body {
   gap: 2rem;
   padding: 0 2rem;
   height: 52px;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -40,14 +41,14 @@ body {
 .site-nav a {
   font-size: 0.75rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
+  color: #86868b;
   text-decoration: none;
   letter-spacing: -0.01em;
   transition: color 0.2s;
   flex-shrink: 0;
 }
-.site-nav a:hover { color: #ffffff; }
-.site-nav a.active { color: #ffffff; font-weight: 500; }
+.site-nav a:hover { color: #1d1d1f; }
+.site-nav a.active { color: #1d1d1f; font-weight: 500; }
 
 .hero {
   text-align: center;
