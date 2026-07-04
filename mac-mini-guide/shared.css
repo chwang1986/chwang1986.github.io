@@ -2,22 +2,22 @@
 @font-face {
   font-family: 'YoungSerif';
   src: url('../_shared/fonts/YoungSerif-Regular.ttf') format('truetype');
-  font-weight: 400;
+  font-weight: 400;  font-display: swap;
 }
 @font-face {
   font-family: 'WorkSans';
   src: url('../_shared/fonts/WorkSans-Regular.ttf') format('truetype');
-  font-weight: 400;
+  font-weight: 400;  font-display: swap;
 }
 @font-face {
   font-family: 'WorkSans';
   src: url('../_shared/fonts/WorkSans-Bold.ttf') format('truetype');
-  font-weight: 700;
+  font-weight: 700;  font-display: swap;
 }
 @font-face {
   font-family: 'JetBrainsMono';
   src: url('../_shared/fonts/JetBrainsMono-Regular.ttf') format('truetype');
-  font-weight: 400;
+  font-weight: 400;  font-display: swap;
 }
 
 :root {
