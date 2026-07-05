@@ -26,16 +26,30 @@ while lsof -Pi :$PORT -sTCP:LISTEN -t >/dev/null 2>&1; do
     fi
 done
 
+URL="http://localhost:$PORT"
+
 echo "🚀 启动本地服务器..."
 echo "📁 项目目录: $SCRIPT_DIR"
-echo "🔗 访问地址: http://localhost:$PORT"
+echo "🔗 访问地址: $URL"
 echo ""
 echo "📌 可用入口:"
-echo "   总览首页: http://localhost:$PORT"
-echo "   Mac 指南: http://localhost:$PORT/mac-mini-guide/mac-mini-guide.html"
-echo "   AI 学习:  http://localhost:$PORT/ai-guide/index.html"
-echo "   趣味物理: http://localhost:$PORT/fun-physics/index.html"
+echo "   总览首页: $URL"
+echo "   Mac 指南: $URL/mac-mini-guide/mac-mini-guide.html"
+echo "   AI 学习:  $URL/ai-guide/index.html"
+echo "   趣味物理: $URL/fun-physics/index.html"
 echo ""
+
+# 尝试自动打开浏览器
+if command -v open >/dev/null 2>&1; then
+    # macOS
+    open "$URL" &
+    echo "🌐 已自动在浏览器中打开"
+elif command -v xdg-open >/dev/null 2>&1; then
+    # Linux
+    xdg-open "$URL" &
+    echo "🌐 已自动在浏览器中打开"
+fi
+
 echo "🛑 按 Ctrl+C 停止服务器"
 echo ""
 
