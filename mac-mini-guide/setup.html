@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>环境部署 - Mac 新手笔记</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="../index.html">首页</a>
+    <a href="mac-mini-guide.html">入门</a>
+    <a href="apps.html">软件</a>
+    <a href="setup.html" class="active">部署</a>
+    <a href="bad-habits.html">习惯</a>
+    <a href="shortcuts.html">快捷键</a>
+    <a href="tips.html">技巧</a>
+    <a href="cheatsheet.html">速查</a>
+    <a href="../about.html">关于</a>
+  </nav>
+
+  <div class="container">
+    <h1>环境部署</h1>
+    <p class="subtitle">把 Mac 变成 AI 开发机的步骤</p>
+
+    <h2>第一步：装 Homebrew</h2>
+    <div class="note-card">
+      <p>Mac 上最好用的包管理器，装软件、装环境都用它。</p>
+      <p>打开终端，粘贴这行命令，回车：</p>
+      <pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
+      <p>装完之后运行这两行，把 Homebrew 加到环境变量：</p>
+      <pre><code>echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"</code></pre>
+      <div class="tip-box">
+        <strong>验证</strong>：运行 <code>brew --version</code>，看到版本号就说明装好了。
+      </div>
+    </div>
+
+    <h2>第二步：装 Python</h2>
+    <div class="note-card">
+      <p>Mac 自带 Python，但版本老。我们用 Homebrew 装最新的：</p>
+      <pre><code>brew install python</code></pre>
+      <p>装完之后验证：</p>
+      <pre><code>python3 --version
+pip3 --version</code></pre>
+      <div class="tip-box warn">
+        <strong>注意</strong>：以后用 <code>python3</code> 和 <code>pip3</code>，不是 <code>python</code> 和 <code>pip</code>。
+      </div>
+    </div>
+
+    <h2>第三步：装 Git</h2>
+    <div class="note-card">
+      <p>Mac 自带 Git，但版本可能不够新：</p>
+      <pre><code>brew install git</code></pre>
+      <p>配置你的名字和邮箱：</p>
+      <pre><code>git config --global user.name "你的名字"
+git config --global user.email "你的邮箱"</code></pre>
+    </div>
+
+    <h2>第四步：装 Node.js（可选）</h2>
+    <div class="note-card">
+      <p>有些 AI 工具的前端界面需要 Node：</p>
+      <pre><code>brew install node</code></pre>
+    </div>
+
+    <h2>第五步：创建虚拟环境（推荐）</h2>
+    <div class="note-card">
+      <p>不同项目需要的 Python 库版本不一样，用虚拟环境隔离：</p>
+      <pre><code># 创建虚拟环境
+python3 -m venv ~/myenv
+
+# 激活
+source ~/myenv/bin/activate
+
+# 退出
+deactivate</code></pre>
+      <div class="tip-box">
+        <strong>建议</strong>：每个项目建一个虚拟环境，避免库版本冲突。
+      </div>
+    </div>
+
+    <h2>第六步：装常用 Python 库</h2>
+    <div class="note-card">
+      <pre><code>pip3 install numpy pandas matplotlib jupyter requests</code></pre>
+      <p>这些都是 AI 开发最常用的基础库。</p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>Made by AI + Human · <a href="../about.html">关于</a></p>
+  </footer>
+
+</body>
+</html>
