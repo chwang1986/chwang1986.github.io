@@ -39,13 +39,21 @@ eval "$(/opt/homebrew/bin/brew shellenv)"</code></pre>
 
     <h2>第二步：装 Python</h2>
     <div class="note-card">
-      <p>Mac 自带 Python，但版本老。我们用 Homebrew 装最新的：</p>
+      <p>Mac 自带 Python，但版本比较老，建议用 Homebrew 装最新版。</p>
+      <p><strong>1. 先检查系统自带的版本</strong></p>
+      <pre><code>python3 --version</code></pre>
+      <p>如果显示 3.9 或更高，可能已经够用了。如果版本太老，继续下一步。</p>
+      <p><strong>2. 用 Homebrew 安装</strong></p>
       <pre><code>brew install python</code></pre>
-      <p>装完之后验证：</p>
+      <p>这个过程可能需要几分钟，取决于网络速度。</p>
+      <p><strong>3. 验证安装结果</strong></p>
       <pre><code>python3 --version
 pip3 --version</code></pre>
+      <p>看到版本号就说明装好了。</p>
+      <p><strong>4. 升级 pip</strong></p>
+      <pre><code>pip3 install --upgrade pip</code></pre>
       <div class="tip-box warn">
-        <strong>注意</strong>：以后用 <code>python3</code> 和 <code>pip3</code>，不是 <code>python</code> 和 <code>pip</code>。
+        <strong>注意</strong>：以后用 <code>python3</code> 和 <code>pip3</code>，不是 <code>python</code> 和 <code>pip</code>。如果输入 <code>python</code> 提示找不到命令，是正常的。
       </div>
     </div>
 
